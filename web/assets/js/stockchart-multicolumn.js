@@ -13,7 +13,7 @@ $("#column").on("change", function(e){
 });
 
 var $table = $('<table></table>').appendTo('#figcontrol');
-var rmtserver = "ws://jge1-1.lsu.edu:9997/ws";
+var rmtserver = "ws://www.sevenpan.com:9997/ws";
 var lcserver = "ws://localhost:9999/ws";
 var chart =  websocketwidget.stockchart().server(lcserver);//rmtserver); // returns a websocket chart widget generator function
 //console.log(chart);

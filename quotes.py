@@ -44,9 +44,9 @@ import csv
 import re
 import matplotlib.dates as mdates
 import pandas as pd
-import pandas.io.data as web
+from pandas_datareader import data, wb
 
-import matplotlib.finance as finance
+# import matplotlib.finance as finance
 import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
 import matplotlib.mlab as mlab
@@ -153,7 +153,7 @@ def get_quote_daily_pandas(symbol, timerange, save_csv=False):
         end = datetime.datetime.today()
 
     print "reading data range:", start, end
-    history = web.DataReader(symbol, "yahoo", start, end)
+    history = data.DataReader(symbol, "yahoo", start, end)
 
     # append today's quote
     # today = datetime.date.today()
@@ -183,20 +183,20 @@ def get_quote_daily_pandas(symbol, timerange, save_csv=False):
     return history
 
 
-def get_quote_daily_matplotlib(ticker):
+# def get_quote_daily_matplotlib(ticker):
 
-    startdate = datetime.date(2006, 1, 1)
-    today = enddate = datetime.date.today()
-    #ticker = 'SPY'
+#     startdate = datetime.date(2006, 1, 1)
+#     today = enddate = datetime.date.today()
+#     #ticker = 'SPY'
 
 
-    fh = finance.fetch_historical_yahoo(ticker, startdate, enddate)
-    # a numpy record array with fields: date, open, high, low, close, volume, adj_close
+#     fh = finance.fetch_historical_yahoo(ticker, startdate, enddate)
+#     # a numpy record array with fields: date, open, high, low, close, volume, adj_close
 
-    r = mlab.csv2rec(fh)
-    fh.close()
-    r.sort()
-    return r
+#     r = mlab.csv2rec(fh)
+#     fh.close()
+#     r.sort()
+#     return r
 
 
 

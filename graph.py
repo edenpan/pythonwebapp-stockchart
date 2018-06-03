@@ -4,7 +4,7 @@ import urllib2
 import csv
 import re
 import pandas as pd
-import pandas.io.data
+import pandas_datareader
 from pandas.stats.moments import rolling_mean
 import matplotlib.dates as mdates
 import numpy as np
@@ -14,7 +14,7 @@ import datetime
 from pytz import timezone
 import pytz
 import mpld3
-from matplotlib.finance import candlestick
+#from matplotlib.finance import candlestick
 import os.path
 import mpld3plugins
 
@@ -92,7 +92,7 @@ class graph:
 
         for key, value in kargs.items():
             if key == 'timerange':
-                value = map(lambda x: datetime.datetime.today() if x =='today' else pd.to_datetime(x, '%Y-%m-%d'), value)
+                value = map(lambda x: datetime.datetime.today() if x =='today' else pd.to_datetime(x, format='%Y-%m-%d'), value)
 
             self.info[key] = value                
                     
@@ -234,7 +234,7 @@ class graph:
 
         axescolor = '#f6f6f6'  # the axes background color
 
-        ax = self.fig.add_axes(self.figlayout['main']['rect'], axisbg=axescolor)  # left, bottom, width, height
+        ax = self.fig.add_axes(self.figlayout['main']['rect'], facecolor=axescolor)  # left, bottom, width, height
         self.axes.append(ax)
         self.axtop = 0
 
@@ -246,7 +246,7 @@ class graph:
             aname = addonname[i]
             if aname != 'None':
                 #print "create fig axes for ", arect, aname
-                self.axes.append(self.fig.add_axes(arect, axisbg=axescolor, sharex=ax))
+                self.axes.append(self.fig.add_axes(arect, facecolor=axescolor, sharex=ax))
             else:
                 self.axes.append(None)
 
@@ -348,9 +348,10 @@ class graph:
     def plot_to_html(self, serve_html=False):
 
         self.plotdata()
-        #mpld3.show()
+        # mpld3.show()
 
         mainplotid = mpld3.utils.get_id(self.axes[0])
+        print self.axes[0]
         fightml = mpld3.fig_to_html(self.fig)
 
         # to save the results

@@ -81,9 +81,9 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         import re
 
         items = re.findall(r'graph:(.*)', byteify(message))
-        #print items
+        print items
         vargs = items[0].strip().split(' ')
-        #print vargs
+        print vargs
 
         self.graph.update(vargs)
 
